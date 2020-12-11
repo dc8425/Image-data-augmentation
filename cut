@@ -1,0 +1,14 @@
+import cv2
+import glob
+
+i = 0
+
+def crop(img, outdir):
+    img = cv2.imread(img)  # 读入图片
+    cropped = img[206:430, 252:476]  # 裁剪坐标为[y0:y1, x0:x1]
+    # cv2.imwrite('5.jpg', cropped)
+    cv2.imwrite("./caijian/{}.png".format(i), cropped)  # 裁剪并存储在指定文件夹中
+
+for img in glob.glob("./haze/*.png"):  # 对需要裁剪的图片的文件夹循环读取
+    crop(img, "./caijian")
+    i = i + 1
