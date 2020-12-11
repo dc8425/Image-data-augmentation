@@ -1,0 +1,31 @@
+# coding: utf-8
+from PIL import Image
+import os
+import os.path
+import numpy as np
+import cv2
+
+# 指明被遍历的文件夹
+rootdir = r'D:\code\图像增广\gt'
+for parent, dirnames, filenames in os.walk(rootdir):  # 遍历每一张图片
+    for filename in filenames:
+        print('parent is :' + parent)
+        print('filename is :' + filename)
+        currentPath = os.path.join(parent, filename)
+        print('the fulll name of the file is :' + currentPath)
+
+        img = Image.open(currentPath)
+        print(img.format, img.size, img.mode)
+        # img.show()
+        box1 = (0, 0, 512, 512)  # 设置左、上、右、下的像素
+        box2 = (0, 512, 512, 1024)
+        box3 = (512, 0, 1024, 512)
+        box4 = (512, 512, 1024, 1024)
+        image1 = img.crop(box1)  # 图像裁剪
+        image2 = img.crop(box2)
+        image3 = img.crop(box3)
+        image4 = img.crop(box4)
+        image1.save(r"D:\code\图像增广\cunchu_gt" + '\\'  + 'port1' +' '+ filename)
+        image2.save(r"D:\code\图像增广\cunchu_gt" + '\\'  + 'port2' +' '+ filename)
+        image3.save(r"D:\code\图像增广\cunchu_gt" + '\\'  + 'port3' +' '+ filename)
+        image4.save(r"D:\code\图像增广\cunchu_gt" + '\\'  + 'port4' +' '+ filename)
