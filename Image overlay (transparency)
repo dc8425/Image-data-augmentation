@@ -1,0 +1,23 @@
+# coding: utf-8
+from PIL import Image
+import os
+import os.path
+import cv2
+import matplotlib.pyplot as plt
+from skimage import io,data
+import numpy
+
+# 指明被遍历的文件夹
+rootdir = r'D:\code\image_extend\haze'
+for parent, dirnames, filenames in os.walk(rootdir):  # 遍历每一张图片
+    for filename in filenames:
+        print('parent is :' + parent)
+        print('filename is :' + filename)
+        currentPath = os.path.join(parent, filename)
+        print('the fulll name of the file is :' + currentPath)
+
+        img = cv2.imread(currentPath)
+        #print(img.format, img.size, img.mode)
+        img_ori = cv2.imread('D:\code\image_extend\haze/0.png')
+        img1 = cv2.addWeighted(img_ori, 0.7, img, 0.3, 0)
+        cv2.imwrite(r"D:\code\image_extend\cunchu_haze_ronghe" + '\\'  + 'ronghe' +' '+ '1' + filename, img1)
